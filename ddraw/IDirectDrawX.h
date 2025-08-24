@@ -85,8 +85,6 @@ private:
 	void MarkAllSurfacesDirty();
 	void ResetAllSurfaceDisplay();
 	void ReleaseD3D9IndexBuffer(LPDIRECT3DINDEXBUFFER9& d3d9IndexBuffer, DWORD& IndexBufferSize);
-	void ReleaseAllD9Resources(bool BackupData, bool ResetInterface);
-	void ReleaseD9Device();
 	void ReleaseD9Object();
 
 	// Gamma functions
@@ -222,6 +220,8 @@ public:
 
 	// Direct3D9 interfaces
 	UINT GetAdapterIndex() const { return AdapterIndex; }
+	void ReleaseAllD9Resources(bool BackupData, bool ResetInterface);
+	void ReleaseD9Device();
 	bool CheckD9Device(char* FunctionName);
 	LPDIRECT3D9 GetDirectD9Object();
 	LPDIRECT3DDEVICE9 *GetDirectD9Device();

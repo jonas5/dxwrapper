@@ -5480,13 +5480,8 @@ void m_IDirectDrawX::HandleDeactivated()
 
 	ScopedCriticalSection ThreadLockDD(DdrawWrapper::GetDDCriticalSection());
 
-	for (const auto& pDDraw : DDrawVector)
-	{
-		for (const auto& pSurface : pDDraw->SurfaceList)
-		{
-			pSurface.Interface->ReleaseD9Surface(true, true);
-		}
-	}
+	ReleaseAllD9Resources(true, false);
+	ReleaseD9Device();
 }
 
 void m_IDirectDrawX::HandleReactivated()
@@ -5495,13 +5490,7 @@ void m_IDirectDrawX::HandleReactivated()
 
 	ScopedCriticalSection ThreadLockDD(DdrawWrapper::GetDDCriticalSection());
 
-	for (const auto& pDDraw : DDrawVector)
-	{
-		for (const auto& pSurface : pDDraw->SurfaceList)
-		{
-			pSurface.Interface->CreateD9Surface();
-		}
-	}
+	CreateD9Device(__FUNCTION__);
 }
 
 // ******************************
