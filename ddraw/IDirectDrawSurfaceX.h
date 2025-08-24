@@ -251,7 +251,6 @@ private:
 	void CheckMipMapLevelGen();
 	HRESULT CheckInterface(char* FunctionName, bool CheckD3DDevice, bool CheckD3DSurface, bool CheckLostSurface);
 	HRESULT CreateD9AuxiliarySurfaces();
-	HRESULT CreateD9Surface();
 	bool DoesDCMatch(EMUSURFACE* pEmuSurface) const;
 	void SetEmulationGameDC();
 	void UnsetEmulationGameDC();
@@ -488,6 +487,7 @@ public:
 	// Direct3D9 interface functions
 	void SetAsRenderTarget();
 	void ReleaseD9AuxiliarySurfaces();
+	HRESULT CreateD9Surface();
 	void ReleaseD9Surface(bool BackupData, bool ResetSurface);
 	HRESULT PresentSurface(bool IsFlip, bool IsSkipScene);
 	void ResetSurfaceDisplay();
