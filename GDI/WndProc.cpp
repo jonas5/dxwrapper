@@ -346,6 +346,22 @@ LRESULT CALLBACK WndProc::Handler(HWND hWnd, UINT Msg, WPARAM wParam, LPARAM lPa
 		{
 			SwitchingResolution = true;
 		}
+
+		// Handle window activation
+		if (Msg == WM_ACTIVATEAPP)
+		{
+			if (m_IDirectDrawX* pDDraw = m_IDirectDrawX::GetDirectDrawInterface())
+			{
+				if (wParam == FALSE)
+				{
+					pDDraw->HandleDeactivated();
+				}
+				else
+				{
+					pDDraw->HandleReactivated();
+				}
+			}
+		}
 	}
 
 	// Filter some messages while forcing windowed mode

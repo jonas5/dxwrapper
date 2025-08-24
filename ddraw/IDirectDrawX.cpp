@@ -5474,6 +5474,36 @@ HRESULT m_IDirectDrawX::Present(RECT* pSourceRect, RECT* pDestRect)
 	return DD_OK;
 }
 
+void m_IDirectDrawX::HandleDeactivated()
+{
+	Logging::LogDebug() << __FUNCTION__ << " (" << this << ")";
+
+	ScopedCriticalSection ThreadLockDD(DdrawWrapper::GetDDCriticalSection());
+
+	for (const auto& pDDraw : DDrawVector)
+	{
+		for (const auto& pSurface : pDDraw->SurfaceList)
+		{
+			pSurface.Interface->ReleaseD9Surface(true, true);
+		}
+	}
+}
+
+void m_IDirectDrawX::HandleReactivated()
+{
+	Logging::LogDebug() << __FUNCTION__ << " (" << this << ")";
+
+	ScopedCriticalSection ThreadLockDD(DdrawWrapper::GetDDCriticalSection());
+
+	for (const auto& pDDraw : DDrawVector)
+	{
+		for (const auto& pSurface : pDDraw->SurfaceList)
+		{
+			pSurface.Interface->CreateD9Surface();
+		}
+	}
+}
+
 // ******************************
 // External static functions
 // ******************************

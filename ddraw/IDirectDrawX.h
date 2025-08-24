@@ -308,6 +308,10 @@ public:
 	bool IsUsingThreadPresent();
 	HRESULT PresentScene(RECT* pRect);
 
+	// Handle window activation
+	void HandleDeactivated();
+	void HandleReactivated();
+
 	// External static functions
 	static bool CheckDirectDrawXInterface(void* pInterface);
 	static DWORD GetDDrawBitsPixel(HWND hWnd);
